@@ -10,7 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, \App\Restorable;
+
+    protected string $trashTable = 'users_t';
 
     /**
      * The attributes that are mass assignable.
