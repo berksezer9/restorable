@@ -17,6 +17,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/database/MySeeder.php
+/database/seeders/MySeeder.php
 /laradock
 /app/Restorable.php
