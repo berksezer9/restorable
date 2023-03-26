@@ -109,4 +109,15 @@ trait Restorable
         //gets the original values lest the Model object has been updated without being saved to the database.
         DB::table(table: $this->getTrashTable())->insert(values: $this->getRawOriginal());
     }
+
+    public static function restore(mixed $id): void
+    {
+        $dummyObject = (new static);
+
+        $values = DB::table(table: $dummyObject->getTrashTable())->find(id: $id)->get();
+
+        DB::table(table: $dummyObject->getTable())->insert(values: $values->all());
+
+        DB::table(table: $dummyObject->getTrashTable())->delete(id: $id);
+    }
 }
