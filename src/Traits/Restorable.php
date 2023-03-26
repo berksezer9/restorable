@@ -15,7 +15,6 @@ trait Restorable
      *
      * @var string
      */
-    protected string $trashTable;
 
     protected bool $deleteWithoutInsertingIntoTrash = false;
 
@@ -114,9 +113,9 @@ trait Restorable
     {
         $dummyObject = (new static);
 
-        $values = DB::table(table: $dummyObject->getTrashTable())->find(id: $id)->get();
+        $values = DB::table(table: $dummyObject->getTrashTable())->find(id: $id);
 
-        DB::table(table: $dummyObject->getTable())->insert(values: $values->all());
+        DB::table(table: $dummyObject->getTable())->insert(values: (array) $values);
 
         DB::table(table: $dummyObject->getTrashTable())->delete(id: $id);
     }
